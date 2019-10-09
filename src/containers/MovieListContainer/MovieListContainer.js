@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./MovieListContainer.scss";
 import Card from "../../components/Card/Card";
 import ButtonGroup from "../../components/ButtonGroup/ButtonGroup";
@@ -9,12 +9,16 @@ class MovieListContainer extends Component {
   };
   render() {
     return (
-      <div className="movie-list">
-        {this.state.movies.map((movie, i) => {
-          return <Card />;
-        })}
-        <ButtonGroup />
-      </div>
+      <Fragment>
+        <div className="movie-list">
+          {this.state.movies.map((movie, i) => {
+            return <Card />;
+          })}
+        </div>
+        <div className="buttons-container">
+          <ButtonGroup />
+        </div>
+      </Fragment>
     );
   }
 }

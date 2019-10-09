@@ -1,0 +1,17 @@
+.button-group {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+  & button {
+    display: flex;
+    justify-content: center;
+    border-radius: 3rem;
+    font-size: 3rem;
+    height: 5rem;
+    width: 5rem;
+    background: yellowgreen;
+  & i {
+      font-size: 3rem;
+  } 
+  }
+}
