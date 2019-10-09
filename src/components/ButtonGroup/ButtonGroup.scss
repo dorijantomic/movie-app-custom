@@ -6,12 +6,23 @@
     display: flex;
     justify-content: center;
     border-radius: 3rem;
+    border-color: transparent;
     font-size: 3rem;
     height: 5rem;
     width: 5rem;
     background: yellowgreen;
-  & i {
+    transition: background-color, color, 0.9s ease, scale 9s ease-in-out;
+
+    &:hover {
+      background: red;
+      color: white;
+    }
+    &:active {
+      transform: scale(1.1);
+      background-color: yellowgreen;
+    }
+    & i {
       font-size: 3rem;
-  } 
+    }
   }
 }
