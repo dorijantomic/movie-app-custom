@@ -1,0 +1,9 @@
+.movie-list {
+    max-width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    &.card-container {
+        background: blue;
+    }
+}
