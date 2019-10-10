@@ -7,10 +7,10 @@ const ButtonGroup = ({ toggleModal }) => {
       <span></span>
 
       <button className="button-group--modal">
-        <i class="material-icons">face</i>
+        <i className="material-icons">face</i>
       </button>
       <button className="button-group--load" onClick={() => toggleModal()}>
-        <i class="material-icons">shuffle</i>
+        <i className="material-icons">shuffle</i>
       </button>
     </div>
   );
