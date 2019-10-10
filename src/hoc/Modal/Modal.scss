@@ -4,7 +4,7 @@
   position: fixed;
 
   background-color: rgba(252, 252, 252, 0.5);
-  overflow: scroll;
+
   & .modal {
     background: white;
     width: 50vw;
@@ -16,8 +16,6 @@
     align-items: center;
     justify-content: space-around;
     box-shadow: 0 4px 12px 0px rgba(0, 0, 0, 0.25);
-    -webkit-animation: slide-top 0.5s cubic-bezier(0, 0.1, 0.53, 1.04) both;
-    animation: slide-top 0.5s cubic-bezier(0, 0.1, 0.53, 1.04) both;
     &__heading {
       width: 100%;
       text-align: center;
@@ -59,6 +57,7 @@
 
 @media screen and (max-width: 1100px) {
   .modal-container {
+    overflow: scroll;
     & .modal {
       width: 80vw;
       &__buttons {
@@ -68,35 +67,17 @@
   }
 }
 
-// keyframes
-
-@-webkit-keyframes slide-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-
-  30% {
-    -webkit-transform: translateY(10px);
-    transform: translateY(10px);
-  }
-
-  60% {
-    -webkit-transform: translateY(40px);
-    transform: translateY(40px);
-  }
-  100% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-  }
+.modal-container-enter {
+  opacity: 0;
 }
-@keyframes slide-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-  100% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-  }
+.modal-container-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+.modal-container-exit {
+  opacity: 1;
+}
+.modal-container-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
 }
