@@ -9,14 +9,15 @@
     background: white;
     width: 50vw;
     margin: 0 auto;
-    margin-top: 10vh;
+    margin-top: 20vh;
     height: fit-content;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     justify-content: space-around;
     box-shadow: 0 4px 12px 0px rgba(0, 0, 0, 0.25);
-
+    -webkit-animation: slide-top 0.5s cubic-bezier(0, 0.1, 0.53, 1.04) both;
+    animation: slide-top 0.5s cubic-bezier(0, 0.1, 0.53, 1.04) both;
     &__heading {
       width: 100%;
       text-align: center;
@@ -54,6 +55,8 @@
   }
 }
 
+// media queries
+
 @media screen and (max-width: 1100px) {
   .modal-container {
     & .modal {
@@ -62,5 +65,38 @@
         width: 90%;
       }
     }
+  }
+}
+
+// keyframes
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  30% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+
+  60% {
+    -webkit-transform: translateY(40px);
+    transform: translateY(40px);
+  }
+  100% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
   }
 }
