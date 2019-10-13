@@ -2,18 +2,21 @@ import React, { Fragment } from "react";
 import "./Card.scss";
 
 const Card = ({ moviesList }) => {
-
   return (
     <Fragment>
       {moviesList !== null ? (
         moviesList.map((movie, i) => (
-          <div className="card-container" key={movie.id}>
+          <div className="card-container" key={movie.id + i}>
+            {console.log(movie)}
             <div className="card-container__rating">
               <span>{movie.vote_average}</span>
             </div>
             <div className="card-container__img">
-              {movie.backdrop_path ? (
+              {movie.backdrop_path && movie.backdrop_path.status !== 500 ? (
                 <img
+                  onError={e =>
+                    (e.target.src = "https://i.imgur.com/U69zau9.jpg")
+                  }
                   src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path} `}
                   alt=""
                   srcset=""

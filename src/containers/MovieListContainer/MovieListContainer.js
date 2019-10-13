@@ -10,6 +10,7 @@ class MovieListContainer extends Component {
     showModal: false,
     guest_session_id: null,
     page: 1,
+    currentGenre: "action",
     allGenre: {
       action: 28,
       adventure: 12,
@@ -69,11 +70,13 @@ class MovieListContainer extends Component {
 
   loadMoreMovies = () => {
     const page = this.state.page;
+    const urlDefault = `https://api.themoviedb.org/3/movie/popular?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&page=${page +
+      1}`;
+    const urlGenre = `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(
+      Math.random() * (500 - 1) + 1
+    )}&with_genres=${this.state.allGenre[this.state.currentGenre]}`;
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&page=${page +
-        1}`
-    )
+    fetch(this.state.genre ? urlGenre : urlDefault)
       .then(res => {
         if (res.status !== 200) {
           console.log(
@@ -94,13 +97,16 @@ class MovieListContainer extends Component {
   fetchMoviesByGenre = genre => {
     this.toggleModal();
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${
-        this.state.allGenre[genre.toLocaleLowerCase()]
-      }`
+      `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.random() *
+        (500 - 1) +
+        1}&with_genres=${this.state.allGenre[genre.toLocaleLowerCase()]}`
     )
       .then(res => res.json())
       .then(res => {
-        this.setState({ movies: res.results });
+        this.setState({
+          movies: res.results,
+          currentGenre: this.state.allGenre[genre.toLocaleLowerCase()]
+        });
       });
   };
   render() {

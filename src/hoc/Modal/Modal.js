@@ -50,7 +50,7 @@ const Modal = ({ showModal, toggleModal, fetchMoviesByGenre }) => {
               Romance
             </button>
             <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
-              Science Fiction
+              Sci-fi
             </button>
             <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
               Thriller
