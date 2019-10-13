@@ -8,7 +8,8 @@ class MovieListContainer extends Component {
   state = {
     movies: null,
     showModal: false,
-    guest_session_id: null
+    guest_session_id: null,
+    page: 1
   };
 
   componentDidMount() {
@@ -51,6 +52,30 @@ class MovieListContainer extends Component {
       };
     });
   };
+
+  loadMoreMovies = () => {
+    const page = this.state.page;
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&page=${page +
+        1}`
+    )
+      .then(res => {
+        if (res.status !== 200) {
+          console.log(
+            `Oh no, it appears that the Fire village is under attack by ${res.status} soldiers`
+          );
+        } else {
+          return res.json();
+        }
+      })
+      .then(res => {  
+        const movies = [...this.state.movies].concat(res.results);
+        this.setState(prevState => {
+          return { page: prevState.page + 1, movies };
+        });
+      });
+  };
   render() {
     return (
       <Fragment>
@@ -59,10 +84,13 @@ class MovieListContainer extends Component {
           toggleModal={this.toggleModal}
         />
         <div className="movie-list">
-          <Card moviesList={this.state.movies}/>
+          <Card moviesList={this.state.movies} />
         </div>
         <div className="buttons-container">
-          <ButtonGroup toggleModal={this.toggleModal} />
+          <ButtonGroup
+            toggleModal={this.toggleModal}
+            loadMoreMovies={this.loadMoreMovies}
+          />
         </div>
       </Fragment>
     );

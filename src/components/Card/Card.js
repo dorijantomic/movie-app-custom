@@ -12,11 +12,15 @@ const Card = ({ moviesList }) => {
               <span>{movie.vote_average}</span>
             </div>
             <div className="card-container__img">
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-                alt=""
-                srcset=""
-              />
+              {movie.backdrop_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path} `}
+                  alt=""
+                  srcset=""
+                />
+              ) : (
+                <img src={`https://i.imgur.com/U69zau9.jpg`} alt="" srcset="" />
+              )}
             </div>
             <div className="card-container__text">
               <h1>
