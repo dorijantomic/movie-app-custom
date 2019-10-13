@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import "./Card.scss";
 
 const Card = ({ moviesList }) => {
-  console.log(moviesList, "the fuck");
+
   return (
     <Fragment>
       {moviesList !== null ? (

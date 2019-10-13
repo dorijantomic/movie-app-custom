@@ -1,19 +1,18 @@
 import React, { Fragment } from "react";
 import "./Modal.scss";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-const Modal = props => {
+const Modal = ({ showModal, toggleModal, fetchMoviesByGenre }) => {
   return (
     <CSSTransition
       timeout={1000}
-      in={props.showModal}
+      in={showModal}
       unmountOnExit
       classNames="modal-container"
- 
     >
       <div
         className="modal-container"
         onClick={e => {
-          props.toggleModal();
+          toggleModal();
         }}
       >
         <div className="modal" onClick={e => e.stopPropagation()}>
@@ -23,18 +22,42 @@ const Modal = props => {
             <h1>Select Genre</h1>
           </div>
           <div className="modal__buttons">
-            <button onClick={() => props.toggleModal()}>Action</button>
-            <button onClick={() => props.toggleModal()}>Adventure</button>
-            <button onClick={() => props.toggleModal()}>Comedy</button>
-            <button onClick={() => props.toggleModal()}>Crime</button>
-            <button onClick={() => props.toggleModal()}>Drama</button>
-            <button onClick={() => props.toggleModal()}>Fantasy</button>
-            <button onClick={() => props.toggleModal()}>Horror</button>
-            <button onClick={() => props.toggleModal()}>Mystery</button>
-            <button onClick={() => props.toggleModal()}>Romance</button>
-            <button onClick={() => props.toggleModal()}>Science Fiction</button>
-            <button onClick={() => props.toggleModal()}>Thriller</button>
-            <button onClick={() => props.toggleModal()}>Western</button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Action
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Adventure
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Comedy
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Crime
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Drama
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Fantasy
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Horror
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Mystery
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Romance
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Science Fiction
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Thriller
+            </button>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+              Western
+            </button>
           </div>
         </div>
       </div>

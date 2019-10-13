@@ -9,7 +9,21 @@ class MovieListContainer extends Component {
     movies: null,
     showModal: false,
     guest_session_id: null,
-    page: 1
+    page: 1,
+    allGenre: {
+      action: 28,
+      adventure: 12,
+      comedy: 35,
+      crime: 80,
+      drama: 18,
+      fantasy: 14,
+      horror: 27,
+      mystery: 9648,
+      romance: 10749,
+      "sci-fi": 878,
+      thriller: 53,
+      western: 37
+    }
   };
 
   componentDidMount() {
@@ -69,17 +83,31 @@ class MovieListContainer extends Component {
           return res.json();
         }
       })
-      .then(res => {  
+      .then(res => {
         const movies = [...this.state.movies].concat(res.results);
         this.setState(prevState => {
           return { page: prevState.page + 1, movies };
         });
       });
   };
+
+  fetchMoviesByGenre = genre => {
+    this.toggleModal();
+    fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${
+        this.state.allGenre[genre.toLocaleLowerCase()]
+      }`
+    )
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ movies: res.results });
+      });
+  };
   render() {
     return (
       <Fragment>
         <Modal
+          fetchMoviesByGenre={this.fetchMoviesByGenre}
           showModal={this.state.showModal}
           toggleModal={this.toggleModal}
         />
