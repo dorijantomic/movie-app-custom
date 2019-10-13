@@ -7,7 +7,7 @@ const ButtonGroup = ({ toggleModal,loadMoreMovies }) => {
       <span></span>
 
       <button className="button-group--modal" onClick={() => loadMoreMovies()}>
-        <i className="material-icons">face</i>
+       <p>Load</p>
       </button>
       <button className="button-group--load" onClick={() => toggleModal()}>
         <i className="material-icons">shuffle</i>
