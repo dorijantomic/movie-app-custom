@@ -11,7 +11,6 @@ class MovieListContainer extends Component {
     guest_session_id: null,
     page: 1,
     genre: null,
-    currentGenre: null,
     allGenre: {
       action: 28,
       adventure: 12,
@@ -98,7 +97,7 @@ class MovieListContainer extends Component {
   };
 
   fetchMoviesByGenre = genre => {
-    console.log(genre, "actual genre");
+    const allGenre = this.state.allGenre;
     this.toggleModal();
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.random() *
@@ -107,10 +106,9 @@ class MovieListContainer extends Component {
     )
       .then(res => res.json())
       .then(res => {
-        console.log(this.state.allGenre[genre], "all  genre genre");
         this.setState({
           movies: res.results,
-          genre: this.state.allGenre[genre]
+          genre: allGenre[genre]
         });
       })
       .catch(err => console.log(["ERROR"], err));
