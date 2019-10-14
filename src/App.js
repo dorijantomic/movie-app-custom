@@ -7,7 +7,7 @@ import MovieDetailsContainer from "./containers/MovieDetailsContainer/MovieDetai
 
 function App() {
   return (
-    <HashRouter>
+    <HashRouter basename="movie-app-custom">
       <Switch>
         <Route path="/" exact component={MovieListContainer} />
         <Route path="/:movie" exact component={MovieDetailsContainer} />
