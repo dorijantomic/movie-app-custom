@@ -10,7 +10,8 @@ class MovieListContainer extends Component {
     showModal: false,
     guest_session_id: null,
     page: 1,
-    currentGenre: "action",
+    genre: null,
+    currentGenre: null,
     allGenre: {
       action: 28,
       adventure: 12,
@@ -41,7 +42,6 @@ class MovieListContainer extends Component {
         }
       })
       .then(res => {
-        console.log(res);
         this.setState(
           {
             movies: res.results
@@ -53,7 +53,8 @@ class MovieListContainer extends Component {
               .then(res => res.json())
               .then(res => {
                 this.setState({ guestSessionId: res.guest_session_id });
-              });
+              })
+              .catch(err => console.log("[ERROR]", err));
           }
         );
       })
@@ -69,12 +70,13 @@ class MovieListContainer extends Component {
   };
 
   loadMoreMovies = () => {
+    const genre = this.state.genre;
     const page = this.state.page;
     const urlDefault = `https://api.themoviedb.org/3/movie/popular?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&page=${page +
       1}`;
     const urlGenre = `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(
       Math.random() * (500 - 1) + 1
-    )}&with_genres=${this.state.allGenre[this.state.currentGenre]}`;
+    )}&with_genres=${genre}`;
 
     fetch(this.state.genre ? urlGenre : urlDefault)
       .then(res => {
@@ -91,10 +93,12 @@ class MovieListContainer extends Component {
         this.setState(prevState => {
           return { page: prevState.page + 1, movies };
         });
-      });
+      })
+      .catch(err => console.log(["ERROR"], err));
   };
 
   fetchMoviesByGenre = genre => {
+    console.log(genre, "actual genre");
     this.toggleModal();
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.random() *
@@ -103,11 +107,13 @@ class MovieListContainer extends Component {
     )
       .then(res => res.json())
       .then(res => {
+        console.log(this.state.allGenre[genre], "all  genre genre");
         this.setState({
           movies: res.results,
-          currentGenre: this.state.allGenre[genre.toLocaleLowerCase()]
+          genre: this.state.allGenre[genre.toLocaleLowerCase()]
         });
-      });
+      })
+      .catch(err => console.log(["ERROR"], err));
   };
   render() {
     return (

@@ -7,7 +7,6 @@ const Card = ({ moviesList }) => {
       {moviesList !== null ? (
         moviesList.map((movie, i) => (
           <div className="card-container" key={movie.id + i}>
-            {console.log(movie)}
             <div className="card-container__rating">
               <span>{movie.vote_average}</span>
             </div>
