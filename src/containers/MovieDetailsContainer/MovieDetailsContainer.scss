@@ -1,0 +1,25 @@
+.movie-details-container {
+  display: flex;
+}
+
+.card {
+  display: flex;
+  flex-flow: column wrap;
+  &__title {
+      font-size: 2rem;
+  }
+
+  &__img {
+    position: relative;
+    & p {
+      position: absolute;
+      bottom: -31px;
+      font-size: 2rem;
+      background: rgba(0,0,0,0.5%);
+    }
+  }
+
+  &__info {
+      font-size: 3rem;
+  }
+}

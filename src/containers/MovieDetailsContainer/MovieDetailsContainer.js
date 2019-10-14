@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./MovieDetailsContainer.scss"
 
 export default class MovieDetailsContainer extends Component {
   state = {
