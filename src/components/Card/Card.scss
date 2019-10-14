@@ -2,11 +2,10 @@
   background: orange;
   margin-top: 1rem;
   border-radius: 1rem;
+  border-top-right-radius: 2rem;
   margin-bottom: 2rem;
   transition: all 0.2s ease-in-out;
-  &:hover {
-    transform: scale(1.1);
-  }
+  
 
   &__rating {
     display: flex;
@@ -35,6 +34,14 @@
 
     & p {
       font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .card-container {
+    &:hover {
+      transform: scale(1.1);
     }
   }
 }
