@@ -22,40 +22,40 @@ const Modal = ({ showModal, toggleModal, fetchMoviesByGenre }) => {
             <h1>Select Genre</h1>
           </div>
           <div className="modal__buttons">
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Action
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Adventure
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Comedy
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Crime
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Drama
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Fantasy
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Horror
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Mystery
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Romance
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Sci-fi
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Thriller
             </button>
-            <button onClick={e => fetchMoviesByGenre(e.target.textContent)}>
+            <button onClick={e => fetchMoviesByGenre(e.target.textContent.toLocaleLowerCase())}>
               Western
             </button>
           </div>

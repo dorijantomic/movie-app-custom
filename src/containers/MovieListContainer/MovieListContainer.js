@@ -103,14 +103,14 @@ class MovieListContainer extends Component {
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.random() *
         (500 - 1) +
-        1}&with_genres=${this.state.allGenre[genre.toLocaleLowerCase()]}`
+        1}&with_genres=${this.state.allGenre[genre]}`
     )
       .then(res => res.json())
       .then(res => {
         console.log(this.state.allGenre[genre], "all  genre genre");
         this.setState({
           movies: res.results,
-          genre: this.state.allGenre[genre.toLocaleLowerCase()]
+          genre: this.state.allGenre[genre]
         });
       })
       .catch(err => console.log(["ERROR"], err));
