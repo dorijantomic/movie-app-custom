@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import {Link} from "react-router-dom"
 import "./Card.scss";
 
 const Card = ({ moviesList }) => {
@@ -7,6 +8,8 @@ const Card = ({ moviesList }) => {
       {moviesList !== null ? (
         moviesList.map((movie, i) => (
           <div className="card-container" key={movie.id + i}>
+            <Link to={`/${movie.title}`}>
+           
             <div className="card-container__rating">
               <span>{movie.vote_average}</span>
             </div>
@@ -30,6 +33,7 @@ const Card = ({ moviesList }) => {
               </h1>
               <p>Language: {movie.original_language}</p>
             </div>
+            </Link>
           </div>
         ))
       ) : (
