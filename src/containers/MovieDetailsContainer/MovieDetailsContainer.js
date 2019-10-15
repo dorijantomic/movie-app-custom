@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import "./MovieDetailsContainer.scss"
+import "./MovieDetailsContainer.scss";
 
 export default class MovieDetailsContainer extends Component {
   state = {
     id: 0,
-    movie: null
+    movie: null,
+    rating: 0
   };
 
   componentDidMount() {
@@ -16,9 +17,22 @@ export default class MovieDetailsContainer extends Component {
       .then(res => res.json())
       .then(res => {
         console.log(res);
+        this.calculateRating(res.vote_average);
         this.setState({ movie: res });
       });
   }
+
+  calculateRating = rating => {
+    const totalStars = 10;
+    const formattedRating = (rating / totalStars) * 100;
+    const roundedRating = `${Math.round(formattedRating / 5) * 5}`;
+
+    this.setState({ rating: roundedRating });
+  };
+
+  rateMovie = rating => {
+    alert(rating);
+  };
   render() {
     if (this.state.movie) {
       const { movie } = this.state;
@@ -26,9 +40,6 @@ export default class MovieDetailsContainer extends Component {
       return (
         <div className="movie-details-container">
           <div className="card">
-            <div className="card__title">
-              <h1>{movie.title}</h1>
-            </div>
             <div className="card__img">
               <img
                 src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path} `}
@@ -39,14 +50,50 @@ export default class MovieDetailsContainer extends Component {
             </div>
             <div className="card__info">
               <ul>
+                <li> {movie.vote_average}</li>
                 <li>
-                  {movie.vote_average} <span>stars lovely stars</span>
+                  {/* Not proud of this code  ¯\_(ツ)_/¯*/}
+                  <div className="stars-outer">
+                    <i className="material-icons">
+                      <span onClick={() => this.rateMovie(1)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(2)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(3)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(4)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(5)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(6)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(7)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(8)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(9)}>star</span>{" "}
+                      <span onClick={() => this.rateMovie(10)}>star</span>
+                    </i>
+                    <div
+                      className="stars-inner"
+                      style={{ width: `${this.state.rating}%` }}
+                    >
+                      <i className="material-icons">
+                        <span onClick={() => this.rateMovie(1)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(2)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(3)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(4)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(5)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(6)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(7)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(8)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(9)}>star</span>{" "}
+                        <span onClick={() => this.rateMovie(10)}>star</span>
+                      </i>
+                    </div>
+                  </div>
                 </li>
-                <li>{movie.popularity}</li>
+                <li>{movie.popularity} </li>
                 <li>{movie.original_language}</li>
                 <li>
-                  {movie.production_companies.forEach(company => {
-                    return company;
+                  {movie.production_companies.map((company, i) => {
+                    if (movie.production_companies[++i] !== undefined) {
+                      return company.name + ", ";
+                    } else {
+                      return "and " + company.name;
+                    }
                   })}
                 </li>
               </ul>
