@@ -41,21 +41,9 @@ class MovieListContainer extends Component {
         }
       })
       .then(res => {
-        this.setState(
-          {
-            movies: res.results
-          },
-          () => {
-            fetch(
-              `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`
-            )
-              .then(res => res.json())
-              .then(res => {
-                this.setState({ guestSessionId: res.guest_session_id });
-              })
-              .catch(err => console.log("[ERROR]", err));
-          }
-        );
+        this.setState({
+          movies: res.results
+        });
       })
       .catch(err => console.log(err));
   }

@@ -5,7 +5,9 @@ export default class MovieDetailsContainer extends Component {
   state = {
     id: 0,
     movie: null,
-    rating: 0
+    rating: 0,
+    guestSessionId: null,
+    ratedMovies: null
   };
 
   componentDidMount() {
@@ -18,7 +20,9 @@ export default class MovieDetailsContainer extends Component {
       .then(res => {
         console.log(res);
         this.calculateRating(res.vote_average);
-        this.setState({ movie: res });
+        this.setState({ movie: res, id: res.id }, () => {
+          this.fetchRatedMovies(this.props.guestSessionId);
+        });
       });
   }
 
@@ -31,12 +35,50 @@ export default class MovieDetailsContainer extends Component {
   };
 
   rateMovie = rating => {
-    alert(rating);
+    fetch(
+      `https://api.themoviedb.org/3/movie/${this.state.id}/rating?guest_session_id=${this.props.guestSessionId}&api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          value: rating
+        }),
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(res => this.fetchRatedMovies(this.props.guestSessionId));
   };
+
+  fetchRatedMovies = guestSessionId => {
+  
+    setTimeout(() => {
+      fetch(
+        `
+        https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=created_at.as`
+      )
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          this.setState({
+            ratedMovies: res.results
+          });
+        }).catch(err => console.log(err, "failed to fetch rated movies"))
+    }, 1000)
+   
+  };
+
   render() {
     if (this.state.movie) {
-      const { movie } = this.state;
+      const { movie, id } = this.state;
+      let userRating = null;
+      if (this.state.ratedMovies) {
+        userRating =
+          this.state.ratedMovies.filter((movie, i) => movie.id === id) || null;
+      }
 
+      console.log(userRating);
       return (
         <div className="movie-details-container">
           <div className="card">
@@ -85,6 +127,7 @@ export default class MovieDetailsContainer extends Component {
                     </div>
                   </div>
                 </li>
+
                 <li>{movie.popularity} </li>
                 <li>{movie.original_language}</li>
                 <li>
