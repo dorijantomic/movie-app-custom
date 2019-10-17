@@ -52,25 +52,24 @@ export default class MovieDetailsContainer extends Component {
   };
 
   fetchRatedMovies = guestSessionId => {
-  
     setTimeout(() => {
- 
       fetch(
         `
-        https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?sort_by=created_at.asc&language=en-US&api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`
-      , {
-        method: "GET",
-        cache: "no-cache"
-      })
+        https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?sort_by=created_at.asc&language=en-US&api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`,
+        {
+          method: "GET",
+          cache: "no-cache"
+        }
+      )
         .then(res => res.json())
         .then(res => {
           console.log(res);
           this.setState({
             ratedMovies: res.results
           });
-        }).catch(err => console.log(err, "failed to fetch rated movies"))
-    }, 1000)
-   
+        })
+        .catch(err => console.log(err, "failed to fetch rated movies"));
+    }, 1000);
   };
 
   render() {
@@ -92,11 +91,12 @@ export default class MovieDetailsContainer extends Component {
                 alt=""
                 srcset=""
               />
-              <p>{movie.overview}</p>
             </div>
             <div className="card__info">
+              <h1>{movie.original_title}</h1>
+              <p>{movie.overview}</p>
               <ul>
-                <li> {movie.vote_average}</li>
+                <li> Rating: {movie.vote_average}</li>
                 <li>
                   {/* Not proud of this code  ¯\_(ツ)_/¯*/}
                   <div className="stars-outer">
@@ -132,9 +132,10 @@ export default class MovieDetailsContainer extends Component {
                   </div>
                 </li>
 
-                <li>{movie.popularity} </li>
-                <li>{movie.original_language}</li>
+                <li>Popularity: {movie.popularity} </li>
+                <li>Language: {movie.original_language}</li>
                 <li>
+                  Production companies:{" "}
                   {movie.production_companies.map((company, i) => {
                     if (movie.production_companies[++i] !== undefined) {
                       return company.name + ", ";
@@ -153,3 +154,4 @@ export default class MovieDetailsContainer extends Component {
     }
   }
 }
+

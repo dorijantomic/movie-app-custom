@@ -1,18 +1,32 @@
+body {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
 .movie-details-container {
 }
 
 .card {
+  display: flex;
+  flex-flow: column wrap;
+  font-size: 1.5rem;
   &__title {
   }
 
   &__img {
     img {
+      width: 100%;
     }
     & p {
     }
   }
 
   &__info {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 95%;
+    margin: 0 auto;
     & .stars-outer {
       position: relative;
       display: inline-block;
@@ -28,8 +42,26 @@
         color: orange;
       }
     }
+    & ul {
+      list-style: none;
+      padding: 0;
+    }
   }
 }
 span:hover {
   cursor: pointer;
+}
+
+@media screen and (min-width: 1992px) {
+  .card {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width: 1336px) {
+  .card {
+    & p {
+      width: 50%;
+    }
+  }
 }
