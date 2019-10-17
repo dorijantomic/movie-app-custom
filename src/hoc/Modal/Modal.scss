@@ -6,7 +6,7 @@
   background-color: rgba(252, 252, 252, 0.5);
 
   & .modal {
-    background: white;
+    background: black;
     width: 50vw;
     margin: 0 auto;
     margin-top: 20vh;
@@ -27,23 +27,23 @@
       margin: 1rem 0;
     }
     & button {
-      box-shadow: inset 0px 1px 0px 0px #91b8b3;
-      background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
-      background-color: #768d87;
+      /* background-color: #768d87; */
       border-radius: 22px;
-      display: inline-block;
+      /* display: inline-block; */
       cursor: pointer;
-      color: #ffffff;
-      font-family: Arial;
+      /* color: #ffffff; */
+      /* font-family: Arial; */
+      border-color: transparent;
       font-size: 15px;
+      border-color: none;
       font-weight: bold;
       padding: 11px 76px;
       margin-bottom: 0.4rem;
       text-decoration: none;
-      text-shadow: 0px -1px 0px #2b665e;
+      /* text-shadow: 0px -1px 0px #2b665e; */
+      background: #9bcc25;
       &:hover {
-        background: linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-        background-color: #6c7c7c;
+        background-color: orange;
       }
       &:active {
         position: relative;

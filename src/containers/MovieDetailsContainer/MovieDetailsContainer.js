@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./MovieDetailsContainer.scss";
+import StarRating from "../../components/StarRating/StarRating";
 
 export default class MovieDetailsContainer extends Component {
   state = {
@@ -7,7 +8,8 @@ export default class MovieDetailsContainer extends Component {
     movie: null,
     rating: 0,
     guestSessionId: null,
-    ratedMovies: null
+    ratedMovies: null,
+    ratingLabel: null
   };
 
   componentDidMount() {
@@ -72,6 +74,12 @@ export default class MovieDetailsContainer extends Component {
     }, 1000);
   };
 
+  showRatingLabel = label => {
+    this.setState({
+      ratingLabel: label
+    });
+  };
+
   render() {
     if (this.state.movie) {
       const { movie, id } = this.state;
@@ -100,34 +108,19 @@ export default class MovieDetailsContainer extends Component {
                 <li>
                   {/* Not proud of this code  ¯\_(ツ)_/¯*/}
                   <div className="stars-outer">
-                    <i className="material-icons">
-                      <span onClick={() => this.rateMovie(1)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(2)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(3)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(4)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(5)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(6)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(7)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(8)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(9)}>star</span>{" "}
-                      <span onClick={() => this.rateMovie(10)}>star</span>
-                    </i>
+                    <StarRating
+                      showRatingLabel={this.showRatingLabel}
+                      rateMovie={this.props.rateMovie}
+                    />
+                    <p>{this.state.ratingLabel}</p>
                     <div
                       className="stars-inner"
                       style={{ width: `${this.state.rating}%` }}
                     >
-                      <i className="material-icons">
-                        <span onClick={() => this.rateMovie(1)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(2)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(3)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(4)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(5)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(6)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(7)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(8)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(9)}>star</span>{" "}
-                        <span onClick={() => this.rateMovie(10)}>star</span>
-                      </i>
+                      <StarRating
+                        showRatingLabel={this.showRatingLabel}
+                        rateMovie={this.props.rateMovie}
+                      />
                     </div>
                   </div>
                 </li>
@@ -154,4 +147,3 @@ export default class MovieDetailsContainer extends Component {
     }
   }
 }
-
