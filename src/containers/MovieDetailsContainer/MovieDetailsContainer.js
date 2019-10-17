@@ -54,10 +54,14 @@ export default class MovieDetailsContainer extends Component {
   fetchRatedMovies = guestSessionId => {
   
     setTimeout(() => {
+ 
       fetch(
         `
-        https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=created_at.as`
-      )
+        https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?sort_by=created_at.asc&language=en-US&api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`
+      , {
+        method: "GET",
+        cache: "no-cache"
+      })
         .then(res => res.json())
         .then(res => {
           console.log(res);
