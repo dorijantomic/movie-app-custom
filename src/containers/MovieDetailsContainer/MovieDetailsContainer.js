@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./MovieDetailsContainer.scss";
 import StarRating from "../../components/StarRating/StarRating";
 
@@ -17,16 +17,21 @@ export default class MovieDetailsContainer extends Component {
   componentDidMount() {
     fetch(
       `https://api.themoviedb.org/3/movie/${
-        window.location.href.match(/\d+/g).map(Number)[1]
+        window.location.href.match(/\d+/g).map(Number)[1] // <--- in development server add [1] after .map(number)
       }?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US`
-    )
-      .then(res => res.json())
-      .then(res => {
-        this.calculateRating(res.vote_average);
-        this.setState({ movie: res, id: res.id }, () => {
-          this.fetchRatedMovies(this.props.guestSessionId);
+    ).then(res => {
+      if (res.ok) {
+        debugger;
+        res = res.json().then(res => {
+          this.calculateRating(res.vote_average);
+          this.setState({ movie: res, id: res.id }, () => {
+            this.fetchRatedMovies(this.props.guestSessionId);
+          });
         });
-      });
+      } else {
+        return this.props.history.push("/");
+      }
+    });
   }
 
   calculateRating = rating => {
@@ -153,7 +158,18 @@ export default class MovieDetailsContainer extends Component {
         </div>
       );
     } else {
-      return <h1>Loading...</h1>;
+      return (
+        <div
+          style={{
+            height: "100vh",
+            flexFlow: "column",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <h1>Loading...</h1>
+        </div>
+      );
     }
   }
 }

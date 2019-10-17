@@ -23,7 +23,7 @@ class App extends Component {
       )
         .then(res => res.json())
         .then(res => {
-          cookies.set("guestSessionId",  res.guest_session_id, {
+          cookies.set("guestSessionId", res.guest_session_id, {
             path: "/",
             expires: new Date(new Date().getTime() + 60 * 60 * 1000 * 24)
           });
@@ -35,15 +35,16 @@ class App extends Component {
   }
   render() {
     return (
-      <HashRouter basename="movie-app-custom">
+      <HashRouter>
         <Switch>
           <Route path="/" exact component={MovieListContainer} />
           <Route
             path="/:movie"
             exact
-            render={() => (
+            render={props => (
               <MovieDetailsContainer
                 guestSessionId={this.state.guestSessionId}
+                history={props.history}
               />
             )}
           />

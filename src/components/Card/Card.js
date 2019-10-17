@@ -7,7 +7,7 @@ const Card = ({ moviesList }) => {
     <Fragment>
       {moviesList !== null ? (
         moviesList.map((movie, i) => (
-          <div className="card-container" key={movie.id + i}>
+          <div className="card-container" key={movie.id + i + movie.vote_average}>
             <Link to={`/${movie.id}`}>
            
             <div className="card-container__rating">
