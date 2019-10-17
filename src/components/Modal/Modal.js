@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "./Modal.scss";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import {  CSSTransition } from "react-transition-group";
 const Modal = ({ showModal, toggleModal, fetchMoviesByGenre }) => {
   return (
     <CSSTransition

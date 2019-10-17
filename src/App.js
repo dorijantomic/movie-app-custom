@@ -4,7 +4,7 @@ import "./App.scss";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import MovieListContainer from "./containers/MovieListContainer/MovieListContainer";
 import MovieDetailsContainer from "./containers/MovieDetailsContainer/MovieDetailsContainer";
-import { Cookies, withCookies } from "react-cookie";
+import { withCookies } from "react-cookie";
 
 class App extends Component {
   state = {
