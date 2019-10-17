@@ -3,21 +3,22 @@ body {
   margin: 0 auto;
 }
 
-.movie-details-container {
-}
-
 .card {
   display: flex;
   flex-flow: column wrap;
   font-size: 1.5rem;
-  &__title {
+  & .label {
+    display: block;
+    padding-left: 0.1rem;
+    margin: 0px;
+    position: relative;
+    height: 1px;
+    left: 65%;
   }
 
   &__img {
     img {
       width: 100%;
-    }
-    & p {
     }
   }
 
@@ -31,7 +32,6 @@ body {
       position: relative;
       display: inline-block;
       transition: all 0.2s ease-in-out;
-
       & .stars-inner {
         position: absolute;
         top: 0;
@@ -45,6 +45,7 @@ body {
     & ul {
       list-style: none;
       padding: 0;
+      width: 50%;
     }
   }
 }
@@ -57,7 +58,17 @@ span:hover {
     font-size: 2rem;
   }
 }
+@media screen and (max-width: 1336px) {
+  .card {
+    & .label {
+      display: none;
+    }
 
+    & ul {
+      width: auto;
+    }
+  }
+}
 @media screen and (min-width: 1336px) {
   .card {
     & p {

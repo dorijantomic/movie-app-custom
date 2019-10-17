@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import "./MovieListContainer.scss";
 import Card from "../../components/Card/Card";
 import ButtonGroup from "../../components/ButtonGroup/ButtonGroup";
-import Modal from "../../hoc/Modal/Modal";
+import Modal from "../../components/Modal/Modal";
 
 class MovieListContainer extends Component {
   state = {
@@ -34,7 +34,7 @@ class MovieListContainer extends Component {
       .then(res => {
         if (res.status !== 200) {
           console.log(
-            `Oh no, it appears that the Leaf village is under attack by ${res.status} soldiers`
+            `[ERROR]: ${res.status}`
           );
         } else {
           return res.json();
@@ -68,9 +68,7 @@ class MovieListContainer extends Component {
     fetch(this.state.genre ? urlGenre : urlDefault)
       .then(res => {
         if (res.status !== 200) {
-          console.log(
-            `Oh no, it appears that the Fire village is under attack by ${res.status} soldiers`
-          );
+          console.log(`[ERROR]: ${res.status} `);
         } else {
           return res.json();
         }

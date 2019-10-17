@@ -7,9 +7,11 @@ export default class MovieDetailsContainer extends Component {
     id: 0,
     movie: null,
     rating: 0,
+    userRating: null,
     guestSessionId: null,
     ratedMovies: null,
-    ratingLabel: null
+    ratingLabel: null,
+    width: null
   };
 
   componentDidMount() {
@@ -20,7 +22,6 @@ export default class MovieDetailsContainer extends Component {
     )
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         this.calculateRating(res.vote_average);
         this.setState({ movie: res, id: res.id }, () => {
           this.fetchRatedMovies(this.props.guestSessionId);
@@ -33,7 +34,7 @@ export default class MovieDetailsContainer extends Component {
     const formattedRating = (rating / totalStars) * 100;
     const roundedRating = `${Math.round(formattedRating / 5) * 5}`;
 
-    this.setState({ rating: roundedRating });
+    this.setState({ rating: roundedRating, width: roundedRating });
   };
 
   rateMovie = rating => {
@@ -65,7 +66,6 @@ export default class MovieDetailsContainer extends Component {
       )
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.setState({
             ratedMovies: res.results
           });
@@ -74,9 +74,10 @@ export default class MovieDetailsContainer extends Component {
     }, 1000);
   };
 
-  showRatingLabel = label => {
+  showRatingLabel = (label, width) => {
     this.setState({
-      ratingLabel: label
+      ratingLabel: label,
+      width: width === undefined ? this.state.rating : width
     });
   };
 
@@ -89,7 +90,6 @@ export default class MovieDetailsContainer extends Component {
           this.state.ratedMovies.filter((movie, i) => movie.id === id) || null;
       }
 
-      console.log(userRating);
       return (
         <div className="movie-details-container">
           <div className="card">
@@ -103,28 +103,38 @@ export default class MovieDetailsContainer extends Component {
             <div className="card__info">
               <h1>{movie.original_title}</h1>
               <p>{movie.overview}</p>
+
               <ul>
-                <li> Rating: {movie.vote_average}</li>
                 <li>
-                  {/* Not proud of this code  ¯\_(ツ)_/¯*/}
-                  <div className="stars-outer">
-                    <StarRating
-                      showRatingLabel={this.showRatingLabel}
-                      rateMovie={this.props.rateMovie}
-                    />
-                    <p>{this.state.ratingLabel}</p>
-                    <div
-                      className="stars-inner"
-                      style={{ width: `${this.state.rating}%` }}
-                    >
+                  <p className="label">{this.state.ratingLabel}</p>
+                </li>
+                <li>
+                  {" "}
+                  Rating: {movie.vote_average}{" "}
+                  <span>
+                    {" "}
+                    {/* Not proud of this code  ¯\_(ツ)_/¯*/}
+                    <div className="stars-outer">
                       <StarRating
                         showRatingLabel={this.showRatingLabel}
-                        rateMovie={this.props.rateMovie}
+                        rateMovie={this.rateMovie}
                       />
-                    </div>
-                  </div>
-                </li>
 
+                      <div
+                        className="stars-inner"
+                        style={{ width: `${this.state.width}%` }}
+                      >
+                        <StarRating
+                          showRatingLabel={this.showRatingLabel}
+                          rateMovie={this.rateMovie}
+                        />
+                      </div>
+                    </div>
+                  </span>
+                </li>
+                {userRating !== null && userRating[0] ? (
+                  <li>Your Rating: {userRating[0].rating}</li>
+                ) : null}
                 <li>Popularity: {movie.popularity} </li>
                 <li>Language: {movie.original_language}</li>
                 <li>

@@ -6,60 +6,74 @@ const StarRating = props => {
       <i className="material-icons">
         <span
           onClick={() => props.rateMovie(1)}
-          onMouseOver={() => props.showRatingLabel("Horrible")}
+          onMouseOver={() => props.showRatingLabel("😒", 10)}
           onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(2)}
-          onMouseOver={() => props.showRatingLabel("Bad")}
+          onMouseOver={() => props.showRatingLabel("🥱", 20)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(3)}
-          onMouseOver={() => props.showRatingLabel("Do not Recommend")}
+          onMouseOver={() => props.showRatingLabel("👎", 30)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(4)}
-          onMouseOver={() => props.showRatingLabel("Dissapointing")}
+          onMouseOver={() => props.showRatingLabel("😐", 40)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(5)}
-          onMouseOver={() => props.showRatingLabel("Ok")}
+          onMouseOver={() => props.showRatingLabel("👌", 50)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(6)}
-          onMouseOver={() => props.showRatingLabel("Fine")}
+          onMouseOver={() => props.showRatingLabel("🙂", 60)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(7)}
-          onMouseOver={() => props.showRatingLabel("Good")}
+          onMouseOver={() => props.showRatingLabel("👍", 70)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(8)}
-          onMouseOver={() => props.showRatingLabel("Great")}
+          onMouseOver={() => props.showRatingLabel("😀", 80)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
         <span
           onClick={() => props.rateMovie(9)}
-          onMouseOver={() => props.showRatingLabel("Amazing")}
+          onMouseOver={() => props.showRatingLabel("😮", 90)}
+          onMouseLeave={() => props.showRatingLabel("")}
         >
           star
         </span>{" "}
-        <span onClick={() => props.rateMovie(10)}>star</span>
+        <span
+          onClick={() => props.rateMovie(10)}
+          onMouseOver={() => props.showRatingLabel("🤩", 100)}
+          onMouseLeave={() => props.showRatingLabel("")}
+        >
+          star
+        </span>
       </i>
     </Fragment>
   );
