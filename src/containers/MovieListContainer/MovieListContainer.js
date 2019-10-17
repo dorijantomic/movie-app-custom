@@ -33,9 +33,7 @@ class MovieListContainer extends Component {
     )
       .then(res => {
         if (res.status !== 200) {
-          console.log(
-            `[ERROR]: ${res.status}`
-          );
+          console.log(`[ERROR]: ${res.status}`);
         } else {
           return res.json();
         }
@@ -62,7 +60,7 @@ class MovieListContainer extends Component {
     const urlDefault = `https://api.themoviedb.org/3/movie/popular?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&page=${page +
       1}`;
     const urlGenre = `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(
-      Math.random() * (500 - 1) + 1
+      Math.random() * 200 + 1
     )}&with_genres=${genre}`;
 
     fetch(this.state.genre ? urlGenre : urlDefault)
@@ -86,9 +84,9 @@ class MovieListContainer extends Component {
     const allGenre = this.state.allGenre;
     this.toggleModal();
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.random() *
-        (500 - 1) +
-        1}&with_genres=${this.state.allGenre[genre]}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(
+        Math.random() * 200 + 1
+      )}&with_genres=${this.state.allGenre[genre]}`
     )
       .then(res => res.json())
       .then(res => {
