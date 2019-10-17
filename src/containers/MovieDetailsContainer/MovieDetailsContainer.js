@@ -17,7 +17,7 @@ export default class MovieDetailsContainer extends Component {
   componentDidMount() {
     fetch(
       `https://api.themoviedb.org/3/movie/${
-        window.location.href.match(/\d+/g).map(Number)[1] // <--- in development server add [1] after .map(number)
+        window.location.href.match(/\d+/g).map(Number) // <--- in development server add [1] after .map(number)
       }?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US`
     ).then(res => {
       if (res.ok) {
